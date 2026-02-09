@@ -3,269 +3,318 @@
 <head>
   <meta charset="UTF-8" />
   <title>Using Microsoft Whiteboard for Visual Learning</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: "Segoe UI", system-ui, sans-serif;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
 
     body {
-      overflow-y: scroll;
-      scroll-snap-type: y mandatory;
-      background: #f4f6f8;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(180deg, #f8fbff, #eef4ff);
+      color: #1f2937;
     }
 
-    section.slide {
-      height: 100vh;
-      scroll-snap-align: start;
-      padding: 4rem;
+    /* TOP NAVIGATION */
+    .top-nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: white;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      z-index: 1000;
+      padding: 14px 24px;
+      display: flex;
+      gap: 18px;
+      overflow-x: auto;
+    }
+
+    .top-nav a {
+      text-decoration: none;
+      color: #2563eb;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .top-nav a:hover {
+      text-decoration: underline;
+    }
+
+    /* SLIDES */
+    section {
+      min-height: 100vh;
+      padding: 140px 10%;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      gap: 1.5rem;
-      animation: fadeUp 1s ease forwards;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s ease;
     }
 
-    h1, h2 {
-      font-size: 2.5rem;
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
-    p, li {
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 12px;
+    }
+
+    h2 {
+      font-size: 2.2rem;
+      margin-bottom: 20px;
+    }
+
+    p {
       font-size: 1.2rem;
+      margin-bottom: 20px;
     }
 
     ul {
+      font-size: 1.2rem;
+      line-height: 2;
       list-style: none;
-      padding-left: 0;
     }
 
-    .icon-list li::before {
-      content: "✔ ";
-      color: #0078d4;
+    ul li::before {
+      content: "✦ ";
+      color: #2563eb;
       font-weight: bold;
     }
 
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1rem;
-    }
-
-    .card {
-      background: rgba(255,255,255,0.9);
-      padding: 1.5rem;
-      border-radius: 15px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-      animation: float 6s ease-in-out infinite;
-    }
-
-    .image-placeholder {
-      margin-top: 1rem;
-      padding: 2rem;
-      border: 2px dashed #999;
-      border-radius: 12px;
+    /* PLACEHOLDER */
+    .placeholder {
+      margin-top: 32px;
+      padding: 40px;
+      border: 3px dashed #94a3b8;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.7);
       text-align: center;
       font-style: italic;
-      background: rgba(255,255,255,0.6);
     }
 
-    /* Gradients */
-    .g1 { background: linear-gradient(120deg, #ffffff, #e6f2ff); }
-    .g2 { background: linear-gradient(120deg, #fdfbfb, #ebedee); }
-    .g3 { background: linear-gradient(120deg, #f0f9ff, #cbebff); }
-    .g4 { background: linear-gradient(120deg, #fefefe, #f1f1f1); }
-    .g5 { background: linear-gradient(120deg, #ffffff, #e9e9ff); }
+    /* COLOR THEMES */
+    .blue { background: linear-gradient(135deg, #e0ecff, #f8fbff); }
+    .green { background: linear-gradient(135deg, #e6fff4, #f7fffb); }
+    .purple { background: linear-gradient(135deg, #f1e8ff, #fbf8ff); }
+    .yellow { background: linear-gradient(135deg, #fff6d6, #fffdf5); }
 
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
+    /* FAIRY GUIDE */
+    .fairy {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 64px;
+      height: 64px;
+      background: radial-gradient(circle, #c7d2fe, #6366f1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 30px;
+      animation: float 3s ease-in-out infinite;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+      cursor: pointer;
+    }
+
+    .fairy:hover::after {
+      content: "Scroll or use the menu to explore ✨";
+      position: absolute;
+      bottom: 80px;
+      right: 0;
+      background: white;
+      color: #1f2937;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      white-space: nowrap;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
     }
 
     @keyframes float {
-      0%,100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
     }
   </style>
 </head>
 
 <body>
 
-<!-- SLIDE 1 -->
-<section class="slide g1">
+<nav class="top-nav">
+  <a href="#s1">Title</a>
+  <a href="#s2">What & Why</a>
+  <a href="#s3">Where</a>
+  <a href="#s4">Create</a>
+  <a href="#s5">Interface</a>
+  <a href="#s6">Drawing</a>
+  <a href="#s7">Sticky Notes</a>
+  <a href="#s8">Templates</a>
+  <a href="#s9">Collaboration</a>
+  <a href="#s10">Groups</a>
+  <a href="#s11">Tutoring</a>
+  <a href="#s12">Ongoing Boards</a>
+  <a href="#s13">Tips</a>
+  <a href="#s14">Best Practices</a>
+  <a href="#s15">Takeaways</a>
+</nav>
+
+<section id="s1" class="blue">
   <h1>Using Microsoft Whiteboard</h1>
-  <h2>Supporting Visual Learning in Tutoring</h2>
-  <div class="image-placeholder">Insert Microsoft Whiteboard canvas screenshot</div>
+  <p>Supporting Visual Learning in Tutoring</p>
+  <div class="placeholder">Insert Microsoft Whiteboard canvas screenshot here</div>
 </section>
 
-<!-- SLIDE 2 -->
-<section class="slide g2">
-  <h2><i class="fa-solid fa-lightbulb"></i> Why Microsoft Whiteboard Matters</h2>
-  <ul class="icon-list">
+<section id="s2" class="green">
+  <h2>What Is Microsoft Whiteboard & Why It Matters</h2>
+  <ul>
     <li>Brainstorming</li>
     <li>Learning and coaching</li>
     <li>Problem solving</li>
     <li>Project and group work</li>
   </ul>
-  <div class="image-placeholder">Insert tutoring/classroom Whiteboard example</div>
+  <div class="placeholder">Insert tutoring/classroom screenshot</div>
 </section>
 
-<!-- SLIDE 3 -->
-<section class="slide g3">
-  <h2><i class="fa-solid fa-laptop"></i> Where You Can Use It</h2>
-  <div class="cards">
-    <div class="card">Web Browser</div>
-    <div class="card">Microsoft Teams</div>
-    <div class="card">Windows, iOS, Android</div>
-    <div class="card">Surface Hub</div>
-  </div>
-  <div class="image-placeholder">Insert platform access screenshots</div>
+<section id="s3" class="purple">
+  <h2>Where You Can Use It</h2>
+  <ul>
+    <li>Web browser</li>
+    <li>Microsoft Teams</li>
+    <li>Windows, iOS, Android</li>
+    <li>Surface Hub</li>
+  </ul>
 </section>
 
-<!-- SLIDE 4 -->
-<section class="slide g4">
-  <h2><i class="fa-solid fa-plus"></i> Creating a New Whiteboard</h2>
-  <ul class="icon-list">
+<section id="s4" class="yellow">
+  <h2>Creating a New Whiteboard</h2>
+  <ul>
     <li>Board picker view</li>
     <li>Create new Whiteboard tile</li>
-    <li>Sign in with Microsoft account</li>
+    <li>Microsoft account sign-in</li>
   </ul>
-  <div class="image-placeholder">Insert board picker screenshot</div>
 </section>
 
-<!-- SLIDE 5 -->
-<section class="slide g5">
-  <h2><i class="fa-solid fa-layer-group"></i> Whiteboard Interface</h2>
-  <ul class="icon-list">
-    <li>Create panel (sticky notes, text, images)</li>
-    <li>Ink tools and lasso</li>
-    <li>Undo/redo and board name</li>
+<section id="s5" class="blue">
+  <h2>Understanding the Interface</h2>
+  <ul>
+    <li>Create panel</li>
+    <li>Ink tools</li>
     <li>Share and settings</li>
   </ul>
-  <div class="image-placeholder">Insert labeled interface screenshot</div>
 </section>
 
-<!-- SLIDE 6 -->
-<section class="slide g1">
-  <h2><i class="fa-solid fa-pen"></i> Drawing & Inking</h2>
-  <div class="cards">
-    <div class="card">Freehand drawing</div>
-    <div class="card">Highlighters</div>
-    <div class="card">Shape recognition</div>
-    <div class="card">Arrow pen & straight lines</div>
-  </div>
-  <div class="image-placeholder">Insert ink tools example</div>
+<section id="s6" class="green">
+  <h2>Drawing & Inking</h2>
+  <ul>
+    <li>Freehand drawing</li>
+    <li>Highlighters</li>
+    <li>Shape recognition</li>
+  </ul>
 </section>
 
-<!-- SLIDE 7 -->
-<section class="slide g2">
-  <h2><i class="fa-solid fa-note-sticky"></i> Sticky Notes & Text</h2>
-  <ul class="icon-list">
+<section id="s7" class="purple">
+  <h2>Text & Sticky Notes</h2>
+  <ul>
     <li>Step-by-step explanations</li>
-    <li>Color-coded ideas</li>
+    <li>Color coding</li>
     <li>Clear labeling</li>
   </ul>
-  <div class="image-placeholder">Insert sticky notes example</div>
 </section>
 
-<!-- SLIDE 8 -->
-<section class="slide g3">
-  <h2><i class="fa-solid fa-table-cells-large"></i> Templates</h2>
-  <div class="cards">
-    <div class="card">Lesson Plans</div>
-    <div class="card">Brainstorming</div>
-    <div class="card">Compare & Contrast</div>
-    <div class="card">Grids</div>
-  </div>
-  <div class="image-placeholder">Insert template gallery screenshot</div>
+<section id="s8" class="yellow">
+  <h2>Using Templates</h2>
+  <ul>
+    <li>Lesson plans</li>
+    <li>Brainstorming</li>
+    <li>Compare & contrast</li>
+  </ul>
 </section>
 
-<!-- SLIDE 9 -->
-<section class="slide g4">
-  <h2><i class="fa-solid fa-users"></i> Collaboration</h2>
-  <ul class="icon-list">
+<section id="s9" class="blue">
+  <h2>Collaboration</h2>
+  <ul>
     <li>Teams integration</li>
     <li>Share links</li>
-    <li>Live reactions</li>
     <li>Read-only mode</li>
   </ul>
-  <div class="image-placeholder">Insert collaboration menu screenshot</div>
 </section>
 
-<!-- SLIDE 10 -->
-<section class="slide g5">
-  <h2><i class="fa-solid fa-diagram-project"></i> Group Projects</h2>
-  <div class="cards">
-    <div class="card">Brainstorm together</div>
-    <div class="card">Track action items</div>
-    <div class="card">Use images & notes</div>
-    <div class="card">Teams group chats</div>
-  </div>
-  <div class="image-placeholder">Insert group project board</div>
-</section>
-
-<!-- SLIDE 11 -->
-<section class="slide g1">
-  <h2><i class="fa-solid fa-chalkboard-user"></i> Tutoring Sessions</h2>
-  <ul class="icon-list">
-    <li>Prepare boards in advance</li>
-    <li>Infinite canvas</li>
-    <li>Live annotation</li>
-    <li>Export as PNG</li>
+<section id="s10" class="green">
+  <h2>Group Projects</h2>
+  <ul>
+    <li>Shared brainstorming</li>
+    <li>Tracking action items</li>
   </ul>
-  <div class="image-placeholder">Insert lesson board example</div>
 </section>
 
-<!-- SLIDE 12 -->
-<section class="slide g2">
-  <h2><i class="fa-solid fa-thumbtack"></i> Ongoing Boards</h2>
-  <div class="cards">
-    <div class="card">Long-term projects</div>
-    <div class="card">Calendars</div>
-    <div class="card">Progress tracking</div>
-    <div class="card">Pinned in Teams</div>
-  </div>
-  <div class="image-placeholder">Insert bulletin board example</div>
+<section id="s11" class="purple">
+  <h2>Running a Tutoring Session</h2>
+  <ul>
+    <li>Prepare boards ahead</li>
+    <li>Live annotation</li>
+    <li>Export boards</li>
+  </ul>
 </section>
 
-<!-- SLIDE 13 -->
-<section class="slide g3">
-  <h2><i class="fa-solid fa-keyboard"></i> Tips & Shortcuts</h2>
-  <ul class="icon-list">
-    <li>Right-click to add items</li>
-    <li>Object alignment</li>
-    <li>Alt + W / H / X</li>
+<section id="s12" class="yellow">
+  <h2>Ongoing Boards</h2>
+  <ul>
+    <li>Progress tracking</li>
+    <li>Bulletin boards</li>
+  </ul>
+</section>
+
+<section id="s13" class="blue">
+  <h2>Tips & Shortcuts</h2>
+  <ul>
+    <li>Right-click tools</li>
+    <li>Keyboard shortcuts</li>
     <li>Beautify tool</li>
   </ul>
-  <div class="image-placeholder">Insert toolbar reference</div>
 </section>
 
-<!-- SLIDE 14 -->
-<section class="slide g4">
-  <h2><i class="fa-solid fa-check-double"></i> Best Practices</h2>
-  <ul class="icon-list">
+<section id="s14" class="green">
+  <h2>Best Practices</h2>
+  <ul>
     <li>One concept per section</li>
     <li>Use white space</li>
     <li>Reveal gradually</li>
-    <li>Keep boards clean</li>
   </ul>
 </section>
 
-<!-- SLIDE 15 -->
-<section class="slide g5">
-  <h2><i class="fa-solid fa-star"></i> Key Takeaways</h2>
-  <div class="cards">
-    <div class="card">Improves clarity</div>
-    <div class="card">Reduces confusion</div>
-    <div class="card">Boosts engagement</div>
-  </div>
+<section id="s15" class="purple">
+  <h2>Key Takeaways</h2>
+  <ul>
+    <li>Improves clarity</li>
+    <li>Boosts engagement</li>
+    <li>Supports collaboration</li>
+  </ul>
 </section>
+
+<div class="fairy">✨</div>
+
+<script>
+  const sections = document.querySelectorAll("section");
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+      }
+    });
+  }, { threshold: 0.2 });
+
+  sections.forEach(section => observer.observe(section));
+</script>
 
 </body>
 </html>
