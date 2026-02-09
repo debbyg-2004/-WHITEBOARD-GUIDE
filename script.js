@@ -1,19 +1,14 @@
 const slides = document.querySelectorAll(".slide");
-let current = 0;
 
-// Show initial slide
-slides[current].classList.add("active");
+const observer = new IntersectionObserver(
+  entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+      }
+    });
+  },
+  { threshold: 0.2 }
+);
 
-// Handle arrow key navigation
-document.addEventListener("keydown", (e) => {
-  if (e.key === "ArrowRight" && current < slides.length - 1) {
-    slides[current].classList.remove("active");
-    current++;
-    slides[current].classList.add("active");
-  }
-  if (e.key === "ArrowLeft" && current > 0) {
-    slides[current].classList.remove("active");
-    current--;
-    slides[current].classList.add("active");
-  }
-});
+slides.forEach(slide => observer.observe(slide));
