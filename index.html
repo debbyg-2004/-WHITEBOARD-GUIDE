@@ -2,185 +2,270 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Microsoft Whiteboard Interactive Guide</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Using Microsoft Whiteboard for Visual Learning</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", system-ui, sans-serif;
+    }
+
+    body {
+      overflow-y: scroll;
+      scroll-snap-type: y mandatory;
+      background: #f4f6f8;
+    }
+
+    section.slide {
+      height: 100vh;
+      scroll-snap-align: start;
+      padding: 4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1.5rem;
+      animation: fadeUp 1s ease forwards;
+    }
+
+    h1, h2 {
+      font-size: 2.5rem;
+    }
+
+    p, li {
+      font-size: 1.2rem;
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .icon-list li::before {
+      content: "✔ ";
+      color: #0078d4;
+      font-weight: bold;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.9);
+      padding: 1.5rem;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .image-placeholder {
+      margin-top: 1rem;
+      padding: 2rem;
+      border: 2px dashed #999;
+      border-radius: 12px;
+      text-align: center;
+      font-style: italic;
+      background: rgba(255,255,255,0.6);
+    }
+
+    /* Gradients */
+    .g1 { background: linear-gradient(120deg, #ffffff, #e6f2ff); }
+    .g2 { background: linear-gradient(120deg, #fdfbfb, #ebedee); }
+    .g3 { background: linear-gradient(120deg, #f0f9ff, #cbebff); }
+    .g4 { background: linear-gradient(120deg, #fefefe, #f1f1f1); }
+    .g5 { background: linear-gradient(120deg, #ffffff, #e9e9ff); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+  </style>
 </head>
+
 <body>
 
-<div id="slides-container">
+<!-- SLIDE 1 -->
+<section class="slide g1">
+  <h1>Using Microsoft Whiteboard</h1>
+  <h2>Supporting Visual Learning in Tutoring</h2>
+  <div class="image-placeholder">Insert Microsoft Whiteboard canvas screenshot</div>
+</section>
 
-  <!-- Slide 1 -->
-  <section class="slide">
-    <h1>Using Microsoft Whiteboard to Support Visual Learning in Tutoring</h1>
-    <p class="subtitle">For University Tutors & Peer Educators</p>
-    <div class="image placeholder">Insert Microsoft Whiteboard canvas screenshot here</div>
-  </section>
+<!-- SLIDE 2 -->
+<section class="slide g2">
+  <h2><i class="fa-solid fa-lightbulb"></i> Why Microsoft Whiteboard Matters</h2>
+  <ul class="icon-list">
+    <li>Brainstorming</li>
+    <li>Learning and coaching</li>
+    <li>Problem solving</li>
+    <li>Project and group work</li>
+  </ul>
+  <div class="image-placeholder">Insert tutoring/classroom Whiteboard example</div>
+</section>
 
-  <!-- Slide 2 -->
-  <section class="slide">
-    <h2>What Is Microsoft Whiteboard & Why It Matters</h2>
-    <ul>
-      <li>Brainstorming</li>
-      <li>Learning and coaching</li>
-      <li>Problem solving</li>
-      <li>Project and group work</li>
-    </ul>
-    <div class="image placeholder">Insert Whiteboard visual example</div>
-  </section>
+<!-- SLIDE 3 -->
+<section class="slide g3">
+  <h2><i class="fa-solid fa-laptop"></i> Where You Can Use It</h2>
+  <div class="cards">
+    <div class="card">Web Browser</div>
+    <div class="card">Microsoft Teams</div>
+    <div class="card">Windows, iOS, Android</div>
+    <div class="card">Surface Hub</div>
+  </div>
+  <div class="image-placeholder">Insert platform access screenshots</div>
+</section>
 
-  <!-- Slide 3 -->
-  <section class="slide">
-    <h2>Where You Can Use Microsoft Whiteboard</h2>
-    <ul>
-      <li>Web browser</li>
-      <li>Microsoft Teams (meetings, chats, channels)</li>
-      <li>Windows, iOS, Android</li>
-      <li>Surface Hub</li>
-    </ul>
-    <div class="image placeholder">Insert platform screenshot(s)</div>
-  </section>
+<!-- SLIDE 4 -->
+<section class="slide g4">
+  <h2><i class="fa-solid fa-plus"></i> Creating a New Whiteboard</h2>
+  <ul class="icon-list">
+    <li>Board picker view</li>
+    <li>Create new Whiteboard tile</li>
+    <li>Sign in with Microsoft account</li>
+  </ul>
+  <div class="image-placeholder">Insert board picker screenshot</div>
+</section>
 
-  <!-- Slide 4 -->
-  <section class="slide">
-    <h2>Creating a New Whiteboard</h2>
-    <ul>
-      <li>Board picker view</li>
-      <li>"Create new Whiteboard" tile</li>
-      <li>Microsoft account sign-in</li>
-    </ul>
-    <div class="image placeholder">Insert board picker screenshot</div>
-  </section>
+<!-- SLIDE 5 -->
+<section class="slide g5">
+  <h2><i class="fa-solid fa-layer-group"></i> Whiteboard Interface</h2>
+  <ul class="icon-list">
+    <li>Create panel (sticky notes, text, images)</li>
+    <li>Ink tools and lasso</li>
+    <li>Undo/redo and board name</li>
+    <li>Share and settings</li>
+  </ul>
+  <div class="image-placeholder">Insert labeled interface screenshot</div>
+</section>
 
-  <!-- Slide 5 -->
-  <section class="slide">
-    <h2>Understanding the Whiteboard Interface</h2>
-    <ul>
-      <li>Create panel (sticky notes, text, shapes)</li>
-      <li>Pen tools, highlighter</li>
-      <li>Undo/redo & board name</li>
-      <li>Share button & settings</li>
-    </ul>
-    <div class="image placeholder">Insert labeled UI screenshot</div>
-  </section>
+<!-- SLIDE 6 -->
+<section class="slide g1">
+  <h2><i class="fa-solid fa-pen"></i> Drawing & Inking</h2>
+  <div class="cards">
+    <div class="card">Freehand drawing</div>
+    <div class="card">Highlighters</div>
+    <div class="card">Shape recognition</div>
+    <div class="card">Arrow pen & straight lines</div>
+  </div>
+  <div class="image-placeholder">Insert ink tools example</div>
+</section>
 
-  <!-- Slide 6 -->
-  <section class="slide">
-    <h2>Drawing & Inking for Visual Explanations</h2>
-    <ul>
-      <li>Freehand drawing</li>
-      <li>Highlighters</li>
-      <li>Shape recognition</li>
-      <li>Arrow pen & straight line tool</li>
-    </ul>
-    <div class="image placeholder">Insert ink tools example</div>
-  </section>
+<!-- SLIDE 7 -->
+<section class="slide g2">
+  <h2><i class="fa-solid fa-note-sticky"></i> Sticky Notes & Text</h2>
+  <ul class="icon-list">
+    <li>Step-by-step explanations</li>
+    <li>Color-coded ideas</li>
+    <li>Clear labeling</li>
+  </ul>
+  <div class="image-placeholder">Insert sticky notes example</div>
+</section>
 
-  <!-- Slide 7 -->
-  <section class="slide">
-    <h2>Organizing Ideas with Text & Sticky Notes</h2>
-    <ul>
-      <li>Step-by-step problem solving</li>
-      <li>Color-coded notes</li>
-      <li>Clear labeling</li>
-    </ul>
-    <div class="image placeholder">Insert sticky note collaboration example</div>
-  </section>
+<!-- SLIDE 8 -->
+<section class="slide g3">
+  <h2><i class="fa-solid fa-table-cells-large"></i> Templates</h2>
+  <div class="cards">
+    <div class="card">Lesson Plans</div>
+    <div class="card">Brainstorming</div>
+    <div class="card">Compare & Contrast</div>
+    <div class="card">Grids</div>
+  </div>
+  <div class="image-placeholder">Insert template gallery screenshot</div>
+</section>
 
-  <!-- Slide 8 -->
-  <section class="slide">
-    <h2>Using Templates to Save Time</h2>
-    <ul>
-      <li>Lesson plans</li>
-      <li>Brainstorming</li>
-      <li>Compare & contrast</li>
-      <li>Grids & layout templates</li>
-    </ul>
-    <div class="image placeholder">Insert template screen</div>
-  </section>
+<!-- SLIDE 9 -->
+<section class="slide g4">
+  <h2><i class="fa-solid fa-users"></i> Collaboration</h2>
+  <ul class="icon-list">
+    <li>Teams integration</li>
+    <li>Share links</li>
+    <li>Live reactions</li>
+    <li>Read-only mode</li>
+  </ul>
+  <div class="image-placeholder">Insert collaboration menu screenshot</div>
+</section>
 
-  <!-- Slide 9 -->
-  <section class="slide">
-    <h2>Collaboration in Microsoft Whiteboard</h2>
-    <ul>
-      <li>Sharing via Teams</li>
-      <li>Share link in app</li>
-      <li>Reactions & live input</li>
-      <li>Read-only mode</li>
-    </ul>
-    <div class="image placeholder">Insert collaboration screenshot</div>
-  </section>
+<!-- SLIDE 10 -->
+<section class="slide g5">
+  <h2><i class="fa-solid fa-diagram-project"></i> Group Projects</h2>
+  <div class="cards">
+    <div class="card">Brainstorm together</div>
+    <div class="card">Track action items</div>
+    <div class="card">Use images & notes</div>
+    <div class="card">Teams group chats</div>
+  </div>
+  <div class="image-placeholder">Insert group project board</div>
+</section>
 
-  <!-- Slide 10 -->
-  <section class="slide">
-    <h2>Running Group Projects with Whiteboard</h2>
-    <ul>
-      <li>Group brainstorming</li>
-      <li>Tracking action items</li>
-      <li>Sticky notes and visuals</li>
-    </ul>
-    <div class="image placeholder">Insert group project board example</div>
-  </section>
+<!-- SLIDE 11 -->
+<section class="slide g1">
+  <h2><i class="fa-solid fa-chalkboard-user"></i> Tutoring Sessions</h2>
+  <ul class="icon-list">
+    <li>Prepare boards in advance</li>
+    <li>Infinite canvas</li>
+    <li>Live annotation</li>
+    <li>Export as PNG</li>
+  </ul>
+  <div class="image-placeholder">Insert lesson board example</div>
+</section>
 
-  <!-- Slide 11 -->
-  <section class="slide">
-    <h2>Running a Lesson or Tutoring Session</h2>
-    <ul>
-      <li>Board prep ahead of time</li>
-      <li>Infinite canvas for flow</li>
-      <li>Live annotation</li>
-      <li>Export boards as PNG</li>
-    </ul>
-    <div class="image placeholder">Insert lesson plan board screenshot</div>
-  </section>
+<!-- SLIDE 12 -->
+<section class="slide g2">
+  <h2><i class="fa-solid fa-thumbtack"></i> Ongoing Boards</h2>
+  <div class="cards">
+    <div class="card">Long-term projects</div>
+    <div class="card">Calendars</div>
+    <div class="card">Progress tracking</div>
+    <div class="card">Pinned in Teams</div>
+  </div>
+  <div class="image-placeholder">Insert bulletin board example</div>
+</section>
 
-  <!-- Slide 12 -->
-  <section class="slide">
-    <h2>Ongoing Boards & Bulletin Boards</h2>
-    <ul>
-      <li>Long-term project tracking</li>
-      <li>Class calendars</li>
-      <li>Progress updates</li>
-      <li>Pinned boards in Teams</li>
-    </ul>
-    <div class="image placeholder">Insert bulletin board example</div>
-  </section>
+<!-- SLIDE 13 -->
+<section class="slide g3">
+  <h2><i class="fa-solid fa-keyboard"></i> Tips & Shortcuts</h2>
+  <ul class="icon-list">
+    <li>Right-click to add items</li>
+    <li>Object alignment</li>
+    <li>Alt + W / H / X</li>
+    <li>Beautify tool</li>
+  </ul>
+  <div class="image-placeholder">Insert toolbar reference</div>
+</section>
 
-  <!-- Slide 13 -->
-  <section class="slide">
-    <h2>Tips, Tricks & Shortcuts Tutors Should Know</h2>
-    <ul>
-      <li>Right-click to add content</li>
-      <li>Object alignment & layering</li>
-      <li>Keyboard shortcuts</li>
-      <li>Beautify tool</li>
-    </ul>
-    <div class="image placeholder">Insert shortcuts reference screenshot</div>
-  </section>
+<!-- SLIDE 14 -->
+<section class="slide g4">
+  <h2><i class="fa-solid fa-check-double"></i> Best Practices</h2>
+  <ul class="icon-list">
+    <li>One concept per section</li>
+    <li>Use white space</li>
+    <li>Reveal gradually</li>
+    <li>Keep boards clean</li>
+  </ul>
+</section>
 
-  <!-- Slide 14 -->
-  <section class="slide">
-    <h2>Best Practices for Tutors Using Whiteboard</h2>
-    <ul>
-      <li>One concept per section</li>
-      <li>Use white space effectively</li>
-      <li>Reveal info gradually</li>
-      <li>Keep boards clean & structured</li>
-    </ul>
-  </section>
+<!-- SLIDE 15 -->
+<section class="slide g5">
+  <h2><i class="fa-solid fa-star"></i> Key Takeaways</h2>
+  <div class="cards">
+    <div class="card">Improves clarity</div>
+    <div class="card">Reduces confusion</div>
+    <div class="card">Boosts engagement</div>
+  </div>
+</section>
 
-  <!-- Slide 15 -->
-  <section class="slide">
-    <h2>Key Takeaways</h2>
-    <ul>
-      <li>Microsoft Whiteboard improves clarity</li>
-      <li>Visual explanations reduce confusion</li>
-      <li>Collaboration increases engagement</li>
-    </ul>
-  </section>
-
-</div>
-
-<script src="script.js"></script>
 </body>
 </html>
-
